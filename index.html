@@ -19,7 +19,10 @@
     <div class="sections">
       <form>
         <div class="search_container">
-          <input type="search" id="user_input" name="user_input" placeholder="City Name" />
+          <span class="material-symbols-outlined">
+            search
+          </span>
+          <input type="search" id="user_input" name="user_input" placeholder="City Name" autocomplete="off" />
           <button type="submit" id="search_btn">Search</button>
         </div>
       </form>
@@ -32,7 +35,7 @@
             <h1 id="temperature_">4</h1>
           </div>
           <div class="weather_content">
-            <p id="precipitation">Precipitation: 2%</p>
+            <p id="feels_like">Precipitation: 2%</p>
             <p id="humidity">Humidity: 20%</p>
             <p id="wind">Wind: 6 mph</p>
           </div>
