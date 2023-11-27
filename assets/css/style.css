@@ -227,3 +227,87 @@ section {
     display: inline-block;
     color: #4d51576b;
 }
+
+
+
+/* !==== FILTER STYLE ============= */
+
+.temp_filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: absolute;
+}
+
+
+.temperature .material-symbols-outlined {
+    width: 20px;
+    /* Adjust the width as needed */
+    margin: 0 .5rem;
+    transform: rotate(90deg);
+    display: inline-block;
+    color: #4d51571f;
+}
+
+.temp_filters li {
+    font-size: 1rem;
+    cursor: pointer;
+    list-style: none;
+    /* margin-right: 1rem; */
+    border-bottom: 3px solid transparent;
+}
+
+.temp_filters li:hover {
+
+    border-bottom: 3px solid #fbbc04;
+}
+
+.temp_wrap-container {
+
+    margin-top: 45px;
+}
+
+
+/* 
+.temp_wrap {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    height: 100% !important;
+} */
+
+
+/* ======= PROEJCT STYLE ENDS HERE ======== */
+
+
+.days-forecast h2 {
+    margin: 20px 0;
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.123);
+}
+
+.days-forecast .weather-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.weather-cards .card {
+    color: #111111;
+    padding: 18px 16px;
+    list-style: none;
+    width: calc(100% / 5);
+    background: #fbbd047c;
+    border-radius: 5px;
+    font-weight: 100;
+}
+
+.weather-cards .card h3 {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.weather-cards .card img {
+    max-width: 70px;
+    margin: 5px 0 -12px 0;
+}
