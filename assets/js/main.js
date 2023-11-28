@@ -11,29 +11,57 @@ const updateWeatherData = (data) => {
     },
   } = data;
 
-  // Get DOM elements
-  const weatherCardsDiv = document.querySelector(".weather-cards");
-  const nameEl = document.getElementById("name_");
+  // Get DOM elements for current weather
+  const weatherContainer = document.querySelector(".weather_container");
   const temperatureElement = document.getElementById("temperature_");
-  const dateEl = document.getElementById("date_");
-  const weatherEL = document.getElementById("weather_condition");
   const iconEl = document.getElementById("icons_");
   const humidityElement = document.getElementById("humidity");
   const windElement = document.getElementById("wind");
   const feelslikeElement = document.getElementById("feels_like");
+  const nameElement = document.getElementById("name_");
+  const dateElement = document.getElementById("date_");
+  const weatherConditionElement = document.getElementById("weather_condition");
 
-  // Update DOM elements with weather data
-  nameEl.textContent = locationName;
+  // Update DOM elements with current weather data
   temperatureElement.textContent = temperatureValue;
-  dateEl.textContent = locationTime;
-  weatherEL.textContent = weatherCondition;
   iconEl.setAttribute("src", `http:${weatherIcon}`);
   humidityElement.textContent = `Humidity: ${humidityValue}%`;
   windElement.textContent = `Wind: ${windValue} mph`;
   feelslikeElement.textContent = `Feels Like: ${feelslikeValue}°C`;
+  nameElement.textContent = locationName;
+  dateElement.textContent = locationTime;
+  weatherConditionElement.textContent = weatherCondition;
 };
 
-// Function to fetch weather data
+// Function to update the DOM elements with 5-day forecast data
+const updateFiveDayForecast = (forecastData) => {
+  const forecastCards = document.querySelectorAll(".weather-cards .card");
+
+  forecastData.forEach((day, index) => {
+    const {
+      date,
+      day: { avgtemp_c: temp, maxwind_mph: wind, avghumidity: humidity },
+    } = day;
+
+    const card = forecastCards[index];
+    const dateElement = card.querySelector("h3");
+    const tempElement = card.querySelector("h6:nth-child(2)");
+    const windElement = card.querySelector("h6:nth-child(3)");
+    const humidityElement = card.querySelector("h6:nth-child(4)");
+
+    // Update DOM elements with 5-day forecast data
+    // Populate day names dynamically
+    const dayName = new Date(date).toLocaleDateString("en-US", {
+      weekday: "long",
+    });
+    dateElement.textContent = `${dayName}`; // Update the content with the day name
+    tempElement.textContent = `Temp: ${temp}°C`;
+    windElement.textContent = `Wind: ${wind} M/S`;
+    humidityElement.textContent = `Humidity: ${humidity}%`;
+  });
+};
+
+// Function to fetch weather data and 5-day forecast data
 const fetchData = async (inputdata) => {
   try {
     // Validate user input
@@ -42,16 +70,26 @@ const fetchData = async (inputdata) => {
       return;
     }
 
-    // Construct API URL
-    const API_URL = `http://api.weatherapi.com/v1/current.json?key=df3de6076bb94384ba8114637232611&q=${inputdata}&aqi=no`;
+    // Construct API URLs for current weather and 5-day forecast
+    const currentWeatherURL = `http://api.weatherapi.com/v1/current.json?key=df3de6076bb94384ba8114637232611&q=${inputdata}&aqi=no`;
+    const forecastURL = `http://api.weatherapi.com/v1/forecast.json?key=df3de6076bb94384ba8114637232611&q=${inputdata}&days=5`;
 
-    // Fetch weather data
-    const response = await fetch(API_URL);
-    const data = await response.json();
+    // Fetch current weather data
+    const currentWeatherResponse = await fetch(currentWeatherURL);
+    const currentWeatherData = await currentWeatherResponse.json();
 
-    updateWeatherData(data);
+    // Fetch 5-day forecast data
+    const forecastResponse = await fetch(forecastURL);
+    const forecastData = await forecastResponse.json();
 
-    console.log(data);
+    // Update DOM elements with current weather data
+    updateWeatherData(currentWeatherData);
+
+    // Update DOM elements with 5-day forecast data
+    updateFiveDayForecast(forecastData.forecast.forecastday);
+
+    console.log(currentWeatherData);
+    console.log(forecastData);
   } catch (error) {
     console.error("Something went wrong:", error);
   }
@@ -74,7 +112,7 @@ fetchData("London");
 
 //!====== FILTER JS FILE =================================
 
-// Porfolio
+// Portfolio
 let filterItems = document.querySelectorAll(".temp_filters li");
 
 function activePortfolio() {
@@ -97,4 +135,3 @@ let mixerPortfolio = mixitup(".temp_wrap-container", {
     duration: 300,
   },
 });
-//?=============== FIVE DAYS FORCOST =================
