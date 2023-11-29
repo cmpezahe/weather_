@@ -33,31 +33,41 @@ const updateWeatherData = (data) => {
   weatherConditionElement.textContent = weatherCondition;
 };
 
-// Function to update the DOM elements with 5-day forecast data
 const updateFiveDayForecast = (forecastData) => {
   const forecastCards = document.querySelectorAll(".weather-cards .card");
 
   forecastData.forEach((day, index) => {
     const {
       date,
-      day: { avgtemp_c: temp, maxwind_mph: wind, avghumidity: humidity },
+      day: {
+        avgtemp_c: temp,
+        maxwind_mph: wind,
+        avghumidity: humidity,
+        condition,
+      },
     } = day;
 
     const card = forecastCards[index];
     const dateElement = card.querySelector("h3");
-    const tempElement = card.querySelector("h6:nth-child(2)");
-    const windElement = card.querySelector("h6:nth-child(3)");
-    const humidityElement = card.querySelector("h6:nth-child(4)");
+    const iconElement = card.querySelector(".weather-icon");
+    const tempElement = card.querySelector("h6:nth-child(3)"); // Updated index to match your HTML
+    const windElement = card.querySelector("h6:nth-child(4)"); // Updated index to match your HTML
+    const humidityElement = card.querySelector("h6:nth-child(5)"); // Updated index to match your HTML
 
     // Update DOM elements with 5-day forecast data
-    // Populate day names dynamically
     const dayName = new Date(date).toLocaleDateString("en-US", {
       weekday: "long",
     });
-    dateElement.textContent = `${dayName}`; // Update the content with the day name
+    dateElement.textContent = `${dayName}`;
     tempElement.textContent = `Temp: ${temp}°C`;
     windElement.textContent = `Wind: ${wind} M/S`;
     humidityElement.textContent = `Humidity: ${humidity}%`;
+
+    // Update the weather icon
+    if (condition && condition.icon) {
+      iconElement.setAttribute("src", `http:${condition.icon}`);
+      iconElement.setAttribute("alt", "Weather Icon");
+    }
   });
 };
 
