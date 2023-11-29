@@ -13,13 +13,22 @@
 
 :root {
     --y-color: #fbbc04;
+    --light-yellow: #adaca65e;
+    --blue-color: #ffffffe1;
+    --iceCold: #a0d2eb;
+    --freezePurple: #e5eaf5;
+    --sandTan: #e1b382;
+    --Sand-Tan-Shadow: #c89666;
+    --Night-Blue: #2d545e;
+    --Night-Blue-light: #2d545e6b;
+    --NightBlue-Shadow: #12343b;
 
 }
 
 body {
 
     /* background-color: #a9a9a93f; */
-    background-color: burlywood;
+    background-color: var(--Night-Blue);
 }
 
 
@@ -32,7 +41,8 @@ section {
 .sections {
     display: flex;
     flex-direction: column;
-    background-color: #ffffffc5;
+    /* background-color: #ffffffc5; */
+    background-color: var(--iceCold);
     width: 100%;
     margin: 0 auto;
     margin-top: 6rem;
@@ -57,7 +67,8 @@ section {
     margin: 1.6rem 3rem;
     width: 350px;
     /* background-color: #fbbc04; */
-    border: 1px solid var(--y-color);
+    /* border: 1px solid var(--y-color); */
+    border: 1px solid var(--Night-Blue);
     border-radius: 25px;
     display: flex;
     text-align: center;
@@ -69,7 +80,7 @@ section {
 
 .search_container .material-symbols-outlined {
     padding: 0.1rem;
-    color: rgba(128, 128, 128, 0.24);
+    color: var(--Night-Blue);
 }
 
 .search_container input {
@@ -82,7 +93,7 @@ section {
     /* margin: 0; */
     font-size: 18px;
     margin-left: .2rem;
-    color: gray;
+    color: var(--Night-Blue);
     border: none;
     border-left: 1px solid rgba(128, 128, 128, 0.13);
     width: 250px;
@@ -101,7 +112,7 @@ section {
     border: none;
     /* border-radius: 0 8px 8px 0; */
     cursor: pointer;
-    color: rgba(8, 8, 8, 0.384);
+    color: var(--Night-Blue);
     /* border-radius: 9px; */
     /* border: 1px solid var(--y-color); */
     /* margin-left: -4px; */
@@ -253,16 +264,11 @@ section {
     padding: 18px 16px;
     list-style: none;
     width: calc(100% / 5);
-    background: #fbbd0444;
+    background: rgba(255, 255, 255, 0.356);
     border-radius: 5px;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
 }
-
-/* .card {
-    height: 150px;
-    width: 400px;
-} */
 
 .weather-cards .card h3 {
     font-size: 1rem;
@@ -312,7 +318,7 @@ section {
 
 .temp_filters li:hover {
 
-    border-bottom: 3px solid #fbbc04;
+    border-bottom: 3px solid var(--y-color);
 }
 
 .temp_wrap-container {
