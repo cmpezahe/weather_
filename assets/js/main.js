@@ -104,6 +104,34 @@ const fetchData = async (inputdata) => {
     console.error("Something went wrong:", error);
   }
 };
+// Function to get user location
+const getUserLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        fetchData(`${latitude},${longitude}`);
+      },
+      (error) => {
+        console.error("Error getting location:", error);
+        alert("Unable to get your location. Please enter a location manually.");
+      }
+    );
+  } else {
+    console.error("Geolocation is not supported by this browser");
+    alert(
+      "Geolocation is not supported by your browser. Please enter a location manually."
+    );
+  }
+};
+
+// Event handler for getting user location
+const getLocationButton = document.querySelector(".getlocation a");
+getLocationButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  getUserLocation();
+});
 
 // Event handler for form submission
 const getuserInput = (e) => {
